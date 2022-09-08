@@ -1,4 +1,4 @@
-## Result Reproduction
+## Result reproduction
 Simply run the correlation.py script to get the correlation scores reported in our paper:
 ```
 python correlation.py

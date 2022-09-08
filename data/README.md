@@ -1,4 +1,4 @@
-### Human Annotation Data
+### Human annotations
 **data_finalized.json** contains our human annotations. 
 
 It has 1500 examples. Each example is in the following format:
@@ -27,12 +27,12 @@ key: {   # key = exampleId_modelName, e.g., 0_banditsumm
 }
 ```
 
-### Human Annotation Interface
+### Human annotation interface
 
-mturk.html is the HTML interface we used for data annotation on Amazon Mechanical Turk Sandbox.
+**mturk.html** is the HTML interface we used for data annotation on Amazon Mechanical Turk Sandbox.
 
 
-### Metric Scores
+### Metric scores
 
-data_exteval.json and data_other_metrics.json contain the scores of our ExtEval and the other 5 metrics, respectively.
+**data_exteval.json** and **data_other_metrics.json** contain the scores of our ExtEval and the other 5 metrics, respectively.
 

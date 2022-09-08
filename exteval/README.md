@@ -8,7 +8,7 @@
 
 #
 
-### Quick Start
+### Quick start
 Run the following command to get the ExtEval scores and its sub-metric scores 
 for our data (../data/data_finalized.json).
 The results will be save as ../data/data_exteval.json.
@@ -29,11 +29,11 @@ If you want to get ExtEval scores for your own data, please see below and get th
 
 #
 
-### Preprocess Documents and Summaries
-Assume you have already compiled your data into the same format as data_sample.json in the current directory, 
+### Preprocess documents and summaries
+Assume you have already compiled your data into the same format as **data_sample.json** in the current directory, 
 then you can get run the preprocess.py script to get document and summary annotated with coreference clusters.
 ```
 python preprocess.py --data_file data_sample.json --output_file data_sample_processed.json
 ``` 
-Then, the data_sample_processed.json can be used to compute ExtEval scores as the input data file.
+Then, the **data_sample_processed.json** can be used to compute ExtEval scores as the input data file.
 
