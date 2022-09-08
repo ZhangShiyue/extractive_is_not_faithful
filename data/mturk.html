@@ -1,0 +1,182 @@
+<meta content="width=device-width,initial-scale=1" name="viewport" />
+<section class="container" id="Sentiment"><!-- Instructions (collapsible) -->
+<div class="row">
+<div class="col-xs-12 col-md-12">
+<div class="panel panel-primary"><!-- WARNING: the ids "collapseTrigger" and "instructionBody" are being used to enable expand/collapse feature --><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Instructions</strong><span class="collapse-text">&nbsp;(Please read carefully to ensure that your work gets approved as quickly as possible!)</span></a>
+<div class="panel-body" id="instructionBody">
+<p style="font-size: 14px; text-size-adjust: auto;"><span style="font-weight: 700;">Welcome!</span></p>
+
+<p style="font-size: 14px; text-size-adjust: auto;">
+     We need your help in identify unfaithfulness issues in the extracted summary.	</p> <br>
+These issues can be:<br>
+    1. <i>Incorrect Coreference</i>: An anaphora in the summary refers to a different entity from what the same anaphora refers to in the document. The anaphora
+can be a pronoun (they, she, he, it, this, that, those, these, them, her, him,
+their, her, his, etc.) or a determiner (the, this, that, these, those, both, etc.) +
+noun phrase. <br>
+    2. <i>Incomplete Coreference</i>: An anaphora in the summary has ambiguous or no antecedent.<br>
+    3. <i>Incorrect Discourse</i>: A sentence with a discourse linking term (e.g., but, and, also, on one side, meanwhile, etc.)
+    or a discourse unit (usually appears as a sub-sentence) falsely connects to the following or preceding context in the summary,
+    which leads the audience to infer a non-exiting fact, relation, etc. <br>
+    4. <i>Incomplete Discourse</i>: A sentence with a discourse linking term  or a discourse unit has no necessary
+    following or preceding context to complete the discourse. <br>
+    5. <i>Other Misleading Information</i>: Misleading problems include but do not limit to leading the audience to expect
+a different consequence and conveying a dramatically different sentiment.
+    <br><br><br>
+
+    Please note that: <br>
+    1. The summary is composed of extracted sentences (or discourse units) from the document.
+       Those extracted sentences (or sentences that contain extracted units) are <u>underlined</u> in the document. <br>
+    2. The <u>underlined</u> sentences are automatically found, so they may not be aligned with the summary.
+       When they do, use the summary as the groundtruth and manually align it back to the document. <br>
+    3. To help annotation, the predicted coreference clusters from a coreference resolution model are labeled in
+       the document or the summary with colors. The same color refers to the same coreference cluster.<br>
+    4. Since the coreference resolution model is not 100% correct, some coreference mentions are missed by the model
+       and some mentions are incorrectly grouped together. Thus, they only serve as hints for annotation but
+       please do not only rely on them. <br>
+    5. For <i>Incomplete Discourse</i>, the necessary context to complete the semantics does not have to be the immediate following or
+    preceding sentence or unit. As long as the semantics are roughly maintained, there should be no problem.
+    Also, if a discourse unit is short and does not convey much meaning itself, it can be exempted from labeling as an incomplete discourse.<br>
+    6. Please do not label one issue in the summary for multiple error types. Please follow these priorities:
+    incorrect coreference = incorrect discourse > incomplete coreference = incomplete discourse > misleading information.
+    If an issue is labeled as one type, it will not be labeled for other equal- or lower-priority types.
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="row" id="workContent">
+
+<div style="display: none;">
+<p id="example_id">${example_id}</p>
+<p id="model_name">${model_name}</p>
+</div>
+
+<div class="col-xs-12 col-sm-12 content"><label class="group-label">Summary:</label>
+    <p class="well">${summary}<br></p>
+</div>
+
+<div class="col-xs-12 col-sm-12 content"><label class="group-label">Document:</label>
+    <p class="well">${document}<br></p>
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h4>1. Does the summary have any <i>incorrect coreference</i> problems? </h4>
+<input type="radio" id="coref_e1_yes" name="coref_e1" required="" value="yes">
+<label for="coref_e1_yes">Yes</label>&nbsp;&nbsp;
+<input type="radio" id="coref_e1_no" name="coref_e1" required="" value="no">
+<label for="coref_e1_no">No</label>&nbsp;&nbsp;
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h5>If yes, please specify the sentence indexes plus the problematic mentions (e.g., s1-he, s2-her)</h5>
+    <textarea rows="2" cols="125" name="answer_coref_e1"></textarea>
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h5>If yes, please justify your choice.</h5>
+    <textarea rows="2" cols="125" name="comment_coref_e1"></textarea>
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+    <h4>2. Does the summary have any <i>incomplete coreference</i> problems? </h4>
+<input type="radio" id="coref_e2_yes" name="coref_e2" required="" value="yes">
+<label for="coref_e2_yes">Yes</label>&nbsp;&nbsp;
+<input type="radio" id="coref_e2_no" name="coref_e2" required="" value="no">
+<label for="coref_e2_no">No</label>&nbsp;&nbsp;
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h5>If yes, please specify the sentence indexes plus the problematic mentions (e.g., s1-he, s2-her) </h5>
+    <textarea rows="2" cols="125" name="answer_coref_e2"></textarea>
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h4>3. Does the summary have any <i>incorrect discourse</i> problems? </h4>
+<input type="radio" id="discourse_e2_yes" name="discourse_e2" required="" value="yes">
+<label for="discourse_e2_yes">Yes</label>&nbsp;&nbsp;
+<input type="radio" id="discourse_e2_no" name="discourse_e2" required="" value="no">
+<label for="discourse_e2_no">No</label>&nbsp;&nbsp;
+</div>
+
+
+<div class="col-xs-12 col-sm-12 content">
+<h5>If yes, please specify the indexes of problematic sentences (e.g., s1, s3):</h5>
+    <textarea rows="2" cols="125" name="answer_discourse_e2"></textarea>
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h5>If yes, please justify your choice.</h5>
+    <textarea rows="2" cols="125" name="comment_discourse_e2"></textarea>
+</div>
+
+    <div class="col-xs-12 col-sm-12 content">
+<h4>4. Does the summary have any <i>incomplete discourse</i> problems? </h4>
+<input type="radio" id="discourse_e1_yes" name="discourse_e1" required="" value="yes">
+<label for="discourse_e1_yes">Yes</label>&nbsp;&nbsp;
+<input type="radio" id="discourse_e1_no" name="discourse_e1" required="" value="no">
+<label for="discourse_e1_no">No</label>&nbsp;&nbsp;
+</div>
+
+
+<div class="col-xs-12 col-sm-12 content">
+    <h5>If yes, please specify the indexes of problematic sentences (e.g., s1, s3):</h5>
+    <textarea rows="2" cols="125" name="answer_discourse_e1"></textarea>
+</div>
+
+
+
+
+    <div class="col-xs-12 col-sm-12 content">
+<h4>5. Does the summary cause any <i>other misleading information</i> problems? </h4>
+<input type="radio" id="misinfo_yes" name="misinfo" required="" value="yes">
+<label for="misinfo_yes">Yes</label>&nbsp;&nbsp;
+<input type="radio" id="misinfo_no" name="misinfo" required="" value="no">
+<label for="misinfo_no">No</label>&nbsp;&nbsp;
+</div>
+
+<div class="col-xs-12 col-sm-12 content">
+<h5>If yes, please justify your choice.</h5>
+    <textarea rows="2" cols="125" name="comment_misinfo"></textarea>
+</div>
+<hr>
+
+<br>
+
+<!-- <div class="col-xs-12 col-sm-12 fields"><strong style="font-size: 16px">Fluency</strong> -->
+
+<!--<hr />-->
+<!--<div class="col-xs-2 col-sm-4 fields">-->
+<!--<div class="form-group">-->
+<!--<div><b>Which question do you think is better?</b><!&ndash; Input from the Worker &ndash;></div>-->
+
+<!--<div class="btn-group-vertical" data-toggle="buttons" id="Inputs1"><label class="btn btn-default" style="font-size: 14px">-->
+<!--    <input id="Question11" name="quality1" required="" type="radio" value="1" />Question-1</label>-->
+<!--    <label class="btn btn-default" style="font-size: 14px">-->
+<!--        <input id="Question12" name="quality1" required="" type="radio" value="2" />Question-2</label>-->
+<!--    <label class="btn btn-default" style="font-size: 14px">-->
+<!--        <input id="Equal1" name="quality1" required="" type="radio" value="3" />Non-distinguishable</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+</div>
+
+
+</div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script><!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" /> -->
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet" />
+<style type="text/css">#collapseTrigger{ color:#fff; display: block; text-decoration: none; } #submitButton{ white-space: normal; } #instructionBody table{ font-size: 14px; margin-top: 10px; } #instructionBody table caption{ text-align: left; padding: 0 0 5px 0; } #Inputs{ display: block; margin-top: 10px; } .content{ margin-bottom: 15px; } .radio:first-of-type{ margin-top: -5px; }
+</style>
+<script type="text/javascript">
+
+$(".btn-default").on("click", function() {
+  var classArr = ["btn-success"];
+  $(".btn-default").removeClass(classArr.toString().replace(/,/g," "));
+  var value = $(this).find("input[name='options']").val();
+  $(this).addClass("btn-success");
+});
+</script>

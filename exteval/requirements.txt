@@ -1,0 +1,6 @@
+torch==1.12.1
+transformers==4.19.2
+tqdm
+nltk
+allennlp==2.4.0
+allennlp-models==2.4.0
