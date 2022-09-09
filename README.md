@@ -2,10 +2,17 @@
 
 This repository contains the data and code for the following paper:
 
-[Extractive is not Faithful: An Investigation of Broad Unfaithfulness Problems in Extractive Summarization]()
+[Extractive is not Faithful: An Investigation of Broad Unfaithfulness Problems in Extractive Summarization](https://arxiv.org/abs/2209.03549)
 
 ```
-
+@misc{zhang2022extractive,
+      title={Extractive is not Faithful: An Investigation of Broad Unfaithfulness Problems in Extractive Summarization}, 
+      author={Shiyue Zhang and David Wan and Mohit Bansal},
+      year={2022},
+      eprint={2209.03549},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
 ```
 
 #
