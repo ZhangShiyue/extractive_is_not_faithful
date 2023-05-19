@@ -1,4 +1,5 @@
 import json
+import time
 import argparse
 from tqdm import tqdm
 from nltk import word_tokenize, sent_tokenize
@@ -53,42 +54,42 @@ def locate_summary_in_document(summary, document, reorder=True):
 
 
 def find_coreference(document):
-    try:
-        res = predictor.predict(document=document)
-    except:
-        return -1
+    # try:
+    res = predictor.predict(document=document)
+    # except:
+    #     return -1
     document = res["document"]
     clusters = res["clusters"]
-    if len(clusters) > len(colors):
-        print("The number of correference clusters is larger than the number of colors!! Please expand the color list.")
-        return -1
-    else:
-        cluster_map = {}
-        for i, cluster in enumerate(clusters):
-            for start, end in cluster:
-                cluster_map[start] = [end, colors[i], i]
+    # if len(clusters) > len(colors):
+    #     print("The number of correference clusters is larger than the number of colors!! Please expand the color list.")
+    #     return -1
+    # else:
+    cluster_map = {}
+    for i, cluster in enumerate(clusters):
+        for start, end in cluster:
+            cluster_map[start] = [end, colors[i % len(colors)], i]
 
-        new_document = []
-        i = 0
-        while i < len(document):
-            if i in cluster_map:
-                new_document.extend([f"<span style='color:{cluster_map[i][1]}'> [{cluster_map[i][2]}] "] +
-                                    document[i:cluster_map[i][0] + 1] + ["</span>"])
-                i = cluster_map[i][0]+1
-            else:
-                new_document.append(document[i])
-                i += 1
-        document = ' '.join(new_document)
-        document = document.replace('< t >', '<u>').replace('< /t >', '</u>').split('< s >')
-        document = '<br>'.join([f"{i+1}. " + sent for i, sent in enumerate(document)])
-        return document, len(clusters)
+    new_document = []
+    i = 0
+    while i < len(document):
+        if i in cluster_map:
+            new_document.extend([f"<span style='color:{cluster_map[i][1]}'> [{cluster_map[i][2]}] "] +
+                                document[i:cluster_map[i][0] + 1] + ["</span>"])
+            i = cluster_map[i][0]+1
+        else:
+            new_document.append(document[i])
+            i += 1
+    document = ' '.join(new_document)
+    document = document.replace('< t >', '<u>').replace('< /t >', '</u>').split('< s >')
+    document = '<br>'.join([f"{i+1}. " + sent for i, sent in enumerate(document)])
+    return document, len(clusters)
 
 
 def preprocess(data):
     for key in tqdm(data):
         document = data[key]["document"]
         summary = data[key]["summary"]
-        res = locate_summary_in_document(summary, document, reorder=False)
+        res = locate_summary_in_document(summary, document, reorder=True)
         if res == -1:
             print(f"WARNING! Can't locate summary in the document of {key}")
             continue
@@ -118,6 +119,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     with open(args.data_file, 'r') as f:
         data = json.load(f)
+    start_time = time.time()
     processed_data = preprocess(data)
+    end_time = time.time()
+    print(end_time - start_time)
     with open(args.output_file, 'w') as f:
         json.dump(processed_data, f, indent=4)

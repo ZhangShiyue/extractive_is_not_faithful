@@ -1,4 +1,5 @@
 import json
+import time
 import argparse
 import numpy as np
 from tqdm import tqdm
@@ -267,6 +268,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     with open(args.data_file, 'r') as f:
         data = json.load(f)
+    start_time = time.time()
     all_exteval = exteval(data, batch_size=args.batch_size)
+    end_time = time.time()
+    print(end_time - start_time)
     with open(args.output_file, 'w') as f:
         json.dump(all_exteval, f, indent=4)

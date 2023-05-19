@@ -86,7 +86,9 @@ def get_human_scores(data_file="../data/data_finalized.json"):
 
 def system_summary_correlations():
     all_metrics = read_other_metircs()
-    all_metrics.update(read_exteval_metrics())
+    extevals = read_exteval_metrics()
+    for key in all_metrics:
+        all_metrics[key].update(extevals[key])
     human_scores = get_human_scores()
 
     gold_scores = {}
@@ -120,7 +122,9 @@ def system_summary_correlations():
 
 def correlations_for_all_examples():
     all_metrics = read_other_metircs()
-    all_metrics.update(read_exteval_metrics())
+    extevals = read_exteval_metrics()
+    for key in all_metrics:
+        all_metrics[key].update(extevals[key])
     human_scores = get_human_scores()
 
     gold_scores = {}
